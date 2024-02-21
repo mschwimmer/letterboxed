@@ -1,3 +1,4 @@
+/* MAIN CONTENT STYLES */
 body {
     background-color: #a9c9ff; /* Pastel Blue */
     color: #333; /* Dark gray for text for contrast */
@@ -8,7 +9,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    min-height: 100vh; /* Full viewport height */
 }
 
 h1 {
