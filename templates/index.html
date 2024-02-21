@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>NYT Letter Boxed Proof of Concept</h1>
+    <p>
+        This is a proof of concept for a website that helps me do the LetterBoxed from the New York Times.
+        Sometimes you have a really good first word, but need help finding that second finishing word.
+        Hopefully this website will help me do just that.
+        NYT uses the Oxford English Dictionary, which costs money.
+        I don't want to spend money. So, instead I found some free word banks online that I can check against.
+        Sometimes the solutions are part of the word bank, sometimes they aren't.
+    </p>
+    <h2 id="nyt-solution">NYT Solution</h2>
+    <p>{{nyt_solution[0]}}, {{nyt_solution[1]}}</p>
+    <h2 id="programmatic-solution">Programmatic Solution</h2>
+    <ul>
+        {% for solution in prog_solutions %}
+            <li>{{solution[0]}}, {{solution[1]}}</li>
+        {% endfor %}
+    </ul>
+
+
+
+</body>
+</html>
