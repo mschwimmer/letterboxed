@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Letter Boxed Homie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>NYT Letter Boxed Proof of Concept</h1>
@@ -16,6 +16,29 @@
         I don't want to spend money. So, instead I found some free word banks online that I can check against.
         Sometimes the solutions are part of the word bank, sometimes they aren't.
     </p>
+<!--    TODAY's BOARD -->
+    <p>Top Side: {{sides[0]}}</p>
+    <p>Left Side: {{sides[3]}}</p>
+    <p>Right Side: {{sides[1]}}</p>
+    <p>Bottom Side: {{sides[2]}}</p>
+
+
+
+<!--    {% if isCorrect and user_word %}-->
+<!--        {% if isCorrect == True %}-->
+<!--            <h1>Looks like {{user_word}} is part of a two word solution</h1>-->
+<!--        {% else %}-->
+<!--            <h1>Sorry, {{user_word}} isn't part of a two word solution :(</h1>-->
+<!--        {% endif %}-->
+<!--    {% else %}-->
+<!--            <h1>Try submitting a word to see if it's part of a two word solution</h1>-->
+<!--    {% endif %}-->
+<!--    <form action="/index" method="post">-->
+<!--        <input type="text" name="user_word" id="user-word" placeholder="Enter your word here">-->
+<!--        <button type="submit">Submit</button>-->
+<!--    </form>-->
+
+    <!-- SOLUTIONS -->
     <h2 id="nyt-solution">NYT Solution</h2>
     <p>{{nyt_solution[0]}}, {{nyt_solution[1]}}</p>
     <h2 id="programmatic-solution">Programmatic Solution</h2>
@@ -26,6 +49,6 @@
     </ul>
 
 
-
+ <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
