@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>NYT Letter Boxed Proof of Concept</h1>
+    <a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Proof of Concept</h1></a>
     <p>
         This is a proof of concept for a website that helps me do the LetterBoxed from the New York Times.
         Sometimes you have a really good first word, but need help finding that second finishing word.
@@ -22,21 +22,36 @@
     <p>Right Side: {{sides[1]}}</p>
     <p>Bottom Side: {{sides[2]}}</p>
 
-
-
-    {% if is_correct is not none and user_word %}
-        {% if is_correct == true %}
-            <h1>Looks like {{user_word}} is part of a two word solution :)))</h1>
-        {% else %}
-            <h1>Sorry, {{user_word}} isn't part of a two word solution :(</h1>
-        {% endif %}
-    {% else %}
-            <h1>Try submitting a word to see if it's part of a two word solution</h1>
-    {% endif %}
+    <h2>Try submitting a word to see if it's part of a two word solution</h2>
     <form action="/check_word" method="post">
         <input type="text" name="user_word" id="user-word" placeholder="Check word">
         <button type="submit">Submit</button>
     </form>
+
+    {% if is_correct is not none and user_word %}
+        {% if is_correct == true %}
+            <h2>Looks like {{user_word}} is part of a two word solution :)))</h2>
+        {% else %}
+            <h2>Sorry, {{user_word}} isn't part of a two word solution :(</h2>
+        {% endif %}
+    {% endif %}
+
+    <h2>Check all valid words that start with a letter</h2>
+    <form action="/check_letter" method="post">
+        <input type="text" name="user_letter" id="user-letter" placeholder="Check letter">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if user_letter is not none and valid_words is not none %}
+    <h2>Here's the words that start with {{user_letter}}:</h2>
+    <ul>
+        {% for word in valid_words %}
+            <li>{{word}}</li>
+        {% endfor %}
+    </ul>
+    {% elif user_letter is not none and valid_words is none %}
+    <h2>Couldn't find any words that start with {{user_letter}}</h2>
+    {% endif %}
 
     <!-- SOLUTIONS -->
     <h2 id="nyt-solution">NYT Solution</h2>

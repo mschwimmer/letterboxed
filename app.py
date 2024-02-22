@@ -22,7 +22,9 @@ BOARD = Board(TODAY_METADATA['sides'])
 EASY_DICTIONARY = Dictionary("words_easy.txt")
 SOLVER = LetterBoxedSolver(BOARD, EASY_DICTIONARY, "words_easy.txt")
 TWO_WORD_SOLUTIONS = SOLVER.get_two_word_solutions()
-
+FLAT_TWO_WORD_SOLUTIONS = {word for solution in TWO_WORD_SOLUTIONS for word in solution}
+# Create a dict that matches first letter to list of words with first letter
+FIRST_LETTER_MAP = {first_letter: [word for word in FLAT_TWO_WORD_SOLUTIONS if word.startswith(first_letter)] for first_letter in set(word[0] for word in FLAT_TWO_WORD_SOLUTIONS)}
 
 @app.route('/')
 def index():
@@ -37,19 +39,32 @@ def check_word():
     if request.method == 'POST':
         user_input = request.form['user_word'].lower()
 
-        flattened_set_of_solution_words = {word for solution in TWO_WORD_SOLUTIONS for word in solution}
-        is_correct = user_input in flattened_set_of_solution_words
+
+        is_correct = user_input in FLAT_TWO_WORD_SOLUTIONS
         print(user_input)
-        print(flattened_set_of_solution_words)
-        print(user_input in flattened_set_of_solution_words)
+        print(FLAT_TWO_WORD_SOLUTIONS)
+        print(user_input in FLAT_TWO_WORD_SOLUTIONS)
         return render_template('index.html',
-                           sides=TODAY_METADATA['sides'],
-                           nyt_solution=TODAY_METADATA['nyt_solution'],
-                           prog_solutions=TWO_WORD_SOLUTIONS,
-                               is_correct=is_correct,
-                               user_word=user_input)
+                            sides=TODAY_METADATA['sides'],
+                            nyt_solution=TODAY_METADATA['nyt_solution'],
+                            prog_solutions=TWO_WORD_SOLUTIONS,
+                            is_correct=is_correct,
+                            user_word=user_input)
 
+@app.route('/check_letter', methods=['POST'])
+def check_letter():
+    if request.method == 'POST':
+        user_input = request.form['user_letter'].lower()
+        valid_words = FIRST_LETTER_MAP.get(user_input)
+        print(user_input)
+        print(valid_words)
 
+        return render_template('index.html',
+                               sides=TODAY_METADATA['sides'],
+                               nyt_solution=TODAY_METADATA['nyt_solution'],
+                               prog_solutions=TWO_WORD_SOLUTIONS,
+                               valid_words=valid_words,
+                               user_letter=user_input)
 
 if __name__ == '__main__':
     app.run(debug=True)
