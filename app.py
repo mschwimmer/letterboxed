@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 import requests
 import json
 from board import Board
@@ -14,34 +14,42 @@ def get_nyt_metadata():
     start_parens = start_string + r.text[start_string:].index("{")
     end_string = start_parens + r.text[start_parens:].index(",\"dictionary")
     todays_metadata = json.loads(r.text[start_parens:end_string] + "}")
+    todays_metadata['ourSolution'] = [word.lower() for word in todays_metadata['ourSolution']]
     return {'sides': todays_metadata['sides'], 'nyt_solution': todays_metadata['ourSolution']}
 
+TODAY_METADATA = get_nyt_metadata()
+BOARD = Board(TODAY_METADATA['sides'])
+EASY_DICTIONARY = Dictionary("words_easy.txt")
+SOLVER = LetterBoxedSolver(BOARD, EASY_DICTIONARY, "words_easy.txt")
+TWO_WORD_SOLUTIONS = SOLVER.get_two_word_solutions()
 
 
 @app.route('/')
 def index():
-    todays_metadata = get_nyt_metadata()
-    board = Board(todays_metadata['sides'])
-    easy_dictionary = Dictionary("words_easy.txt")
-    solver = LetterBoxedSolver(board, easy_dictionary, "words_easy.txt")
-    two_word_solutions = solver.get_two_word_solutions()
-    print(todays_metadata)
 
-    # if request.method == 'POST':
-    #     user_input = request.form['user_word']
-    #
-    #     flattened_set_of_solution_words = {word for solution in two_word_solutions for word in solution}
-    #     isCorrect = user_input in flattened_set_of_solution_words
-    #     return render_template('index.html',
-    #                        sides=todays_metadata['sides'],
-    #                        nyt_solution=todays_metadata['nyt_solution'],
-    #                        prog_solutions=two_word_solutions,
-    #                            isCorrect=isCorrect,
-    #                            user_word=user_input)
     return render_template('index.html',
-                           sides=todays_metadata['sides'],
-                           nyt_solution=todays_metadata['nyt_solution'],
-                           prog_solutions=two_word_solutions)
+                           sides=TODAY_METADATA['sides'],
+                           nyt_solution=TODAY_METADATA['nyt_solution'],
+                           prog_solutions=TWO_WORD_SOLUTIONS)
+
+@app.route('/check_word', methods=['POST'])
+def check_word():
+    if request.method == 'POST':
+        user_input = request.form['user_word'].lower()
+
+        flattened_set_of_solution_words = {word for solution in TWO_WORD_SOLUTIONS for word in solution}
+        is_correct = user_input in flattened_set_of_solution_words
+        print(user_input)
+        print(flattened_set_of_solution_words)
+        print(user_input in flattened_set_of_solution_words)
+        return render_template('index.html',
+                           sides=TODAY_METADATA['sides'],
+                           nyt_solution=TODAY_METADATA['nyt_solution'],
+                           prog_solutions=TWO_WORD_SOLUTIONS,
+                               is_correct=is_correct,
+                               user_word=user_input)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

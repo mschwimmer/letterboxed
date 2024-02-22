@@ -24,19 +24,19 @@
 
 
 
-<!--    {% if isCorrect and user_word %}-->
-<!--        {% if isCorrect == True %}-->
-<!--            <h1>Looks like {{user_word}} is part of a two word solution</h1>-->
-<!--        {% else %}-->
-<!--            <h1>Sorry, {{user_word}} isn't part of a two word solution :(</h1>-->
-<!--        {% endif %}-->
-<!--    {% else %}-->
-<!--            <h1>Try submitting a word to see if it's part of a two word solution</h1>-->
-<!--    {% endif %}-->
-<!--    <form action="/index" method="post">-->
-<!--        <input type="text" name="user_word" id="user-word" placeholder="Enter your word here">-->
-<!--        <button type="submit">Submit</button>-->
-<!--    </form>-->
+    {% if is_correct is not none and user_word %}
+        {% if is_correct == true %}
+            <h1>Looks like {{user_word}} is part of a two word solution :)))</h1>
+        {% else %}
+            <h1>Sorry, {{user_word}} isn't part of a two word solution :(</h1>
+        {% endif %}
+    {% else %}
+            <h1>Try submitting a word to see if it's part of a two word solution</h1>
+    {% endif %}
+    <form action="/check_word" method="post">
+        <input type="text" name="user_word" id="user-word" placeholder="Check word">
+        <button type="submit">Submit</button>
+    </form>
 
     <!-- SOLUTIONS -->
     <h2 id="nyt-solution">NYT Solution</h2>
