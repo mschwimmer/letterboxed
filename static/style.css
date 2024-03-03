@@ -41,3 +41,60 @@ p {
     text-align: justify; /* Optional: This will justify the text for better readability */
 }
 
+.board {
+    position: relative;
+    width: 120px; /* Adjust based on your needs */
+    height: 120px; /* Adjust based on your needs */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.square {
+    width: 100px; /* Set the width of the square */
+    height: 100px; /* Set the height of the square */
+    border: 2px solid black; /* Create a black outline */
+    position: absolute;
+}
+
+.top, .bottom, .left, .right {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    letter-spacing: 10px;
+}
+
+.top {
+    top: -10px;
+    left: 0;
+    width: 100%;
+    justify-content: space-evenly;
+    text-align: center;
+}
+
+.bottom {
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.left {
+    top: 0;
+    left: -10px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+}
+
+.right {
+    top: 0;
+    right: -10px;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    writing-mode: vertical-lr;
+}

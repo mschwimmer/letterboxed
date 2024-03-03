@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Proof of Concept</h1></a>
+    <a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Homie</h1></a>
     <p>
         This is a proof of concept for a website that helps me do the LetterBoxed from the New York Times.
         Sometimes you have a really good first word, but need help finding that second finishing word.
@@ -17,10 +17,14 @@
         Sometimes the solutions are part of the word bank, sometimes they aren't.
     </p>
 <!--    TODAY's BOARD -->
-    <p>Top Side: {{sides[0]}}</p>
-    <p>Left Side: {{sides[3]}}</p>
-    <p>Right Side: {{sides[1]}}</p>
-    <p>Bottom Side: {{sides[2]}}</p>
+    <h1>Today's Board</h1>
+    <div class="board">
+        <div class="top">{{sides[0]}}</div>
+        <div class="left">{{sides[3]}}</div>
+        <div class="right">{{sides[1]}}</div>
+        <div class="bottom">{{sides[2]}}</div>
+        <div class="square"></div>
+    </div>
 
     <h2>Try submitting a word to see if it's part of a two word solution</h2>
     <form action="/check_word" method="post">
