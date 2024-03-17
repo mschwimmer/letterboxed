@@ -12,6 +12,10 @@ body {
     min-height: 100vh; /* Full viewport height */
 }
 
+container {
+    display:flex;
+}
+
 h1 {
     text-align: center;
 }
@@ -26,12 +30,6 @@ li {
     padding: 8px;
     font-family: 'Arial', sans-serif;
     color: #333;
-}
-
-#nyt-solution {
-    text-align: center;
-    font-size: 24px; /* Example font size */
-    margin-top: 20px; /* Adds some space between the h1 and this new element */
 }
 
 p {
@@ -97,4 +95,25 @@ p {
     flex-direction: column;
     justify-content: space-evenly;
     writing-mode: vertical-lr;
+}
+
+/* For hiding and showing information */
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.left-half, .right-half {
+    width: 50%;
+}
+
+/* Optional: to ensure content is centered within each half */
+.left-half, .right-half {
+    display: flex;
+    justify-content: center; /* Align horizontally */
+    align-items: center; /* Align vertically */
+    text-align: center; /* Ensure the text itself is centered if multiple lines */
 }

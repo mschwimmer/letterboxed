@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Homie</h1></a>
     <p>
         This is a proof of concept for a website that helps me do the LetterBoxed from the New York Times.
@@ -58,10 +59,10 @@
     {% endif %}
 
     <!-- SOLUTIONS -->
-    <h2 id="nyt-solution">NYT Solution</h2>
-    <p>{{nyt_solution[0]}}, {{nyt_solution[1]}}</p>
-    <h2 id="programmatic-solution">Programmatic Solution</h2>
-    <ul>
+    <h2 id="nyt-solution-toggle">NYT Solution</h2>
+    <p id="nyt-solution" class="hidden">{{nyt_solution[0]}}, {{nyt_solution[1]}}</p>
+    <h2 id="programmatic-solution-toggle">Programmatic Solution</h2>
+    <ul id="programmatic-solution-list" class="hidden">
         {% for solution in prog_solutions %}
             <li>{{solution[0]}}, {{solution[1]}}</li>
         {% endfor %}
