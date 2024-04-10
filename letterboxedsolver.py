@@ -40,7 +40,7 @@ class LetterBoxedSolver:
         for i in range(len(word) - 1):
             if i == len(word) - 1:
                 return True
-            if word[i+1] not in self.board.valid_next_letter[word[i]]:
+            if word[i+1] not in self.board.valid_next_letters[word[i]]:
                 return False
         return True
 

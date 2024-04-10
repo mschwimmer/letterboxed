@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letter Boxed Homie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 
     <a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Homie</h1></a>
     <p>
-        This is a proof of concept for a website that helps me do the LetterBoxed from the New York Times.
-        Sometimes you have a really good first word, but need help finding that second finishing word.
-        Hopefully this website will help me do just that.
-        NYT uses the Oxford English Dictionary, which costs money.
-        I don't want to spend money. So, instead I found some free word banks online that I can check against.
-        Sometimes the solutions are part of the word bank, sometimes they aren't.
+        Sometimes you need some help from the homie. This homie knows lots of words.
     </p>
 <!--    TODAY's BOARD -->
     <h1>Today's Board</h1>
@@ -48,7 +45,7 @@
     </form>
 
     {% if user_letter is not none and valid_words is not none %}
-    <h2>Here's the words that start with {{user_letter}}:</h2>
+    <h2>H{{user_letter}}{{valid_words}}ere's the words that start with {{user_letter}}:</h2>
     <ul>
         {% for word in valid_words %}
             <li>{{word}}</li>

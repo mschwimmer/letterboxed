@@ -35,7 +35,7 @@ if __name__ == '__main__':
     # What is larger? All possible words from board of a given length?
     # Or the number of words that use only letters from board?
     start = time.time()
-    solver = LetterBoxedSolver(board, easy_dictionary, "words_easy.txt")
+    solver = LetterBoxedSolver(board, easy_dictionary, "../words_easy.txt")
     end = time.time()
     print(f"Creating solver took {end - start} seconds")
 

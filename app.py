@@ -18,6 +18,7 @@ def get_nyt_metadata():
     return {'sides': todays_metadata['sides'], 'nyt_solution': todays_metadata['ourSolution']}
 
 TODAY_METADATA = get_nyt_metadata()
+print(TODAY_METADATA['sides'])
 BOARD = Board(TODAY_METADATA['sides'])
 EASY_DICTIONARY = Dictionary("words_easy.txt")
 SOLVER = LetterBoxedSolver(BOARD, EASY_DICTIONARY, "words_easy.txt")

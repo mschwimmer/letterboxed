@@ -42,7 +42,7 @@ class Board:
         return all_letters
 
     @property
-    def valid_next_letter(self):
+    def valid_next_letters(self):
         """
         Get valid next letter dictionary.
 
