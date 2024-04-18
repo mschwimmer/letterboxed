@@ -35,6 +35,10 @@ class Board:
 
     @property
     def get_all_letters(self):
+        """
+        Get all letters on board
+        :return: SET of all letters on board
+        """
         all_letters = set()
         for side in self.sides:
             for letter in side:
@@ -56,22 +60,22 @@ class Board:
                 valid_letters[letter] = [letter for letter in self.get_all_letters if letter not in side]
         return valid_letters
 
-    def generate_strings(self, n, last_list_index=-1, current_string=''):
-        """
-        Generate all possible strings of length n using characters from the lists,
-        ensuring no consecutive characters come from the same list.
-
-        :param n: The target length of the strings to generate.
-        :param last_list_index: The index of the list from which the last character was taken.
-        :param current_string: The current string being built.
-        :return: A list of all possible strings of length n.
-        """
-        if n == 0:
-            return [current_string]
-        else:
-            strings = []
-            for i, characters in enumerate(self.sides):
-                if i != last_list_index:
-                    for letter in characters:
-                        strings.extend(self.generate_strings(n-1, i, current_string+letter))
-            return strings
+    # def generate_strings(self, n, last_list_index=-1, current_string=''):
+    #     """
+    #     Generate all possible strings of length n using characters from the lists,
+    #     ensuring no consecutive characters come from the same list.
+    #
+    #     :param n: The target length of the strings to generate.
+    #     :param last_list_index: The index of the list from which the last character was taken.
+    #     :param current_string: The current string being built.
+    #     :return: A list of all possible strings of length n.
+    #     """
+    #     if n == 0:
+    #         return [current_string]
+    #     else:
+    #         strings = []
+    #         for i, characters in enumerate(self.sides):
+    #             if i != last_list_index:
+    #                 for letter in characters:
+    #                     strings.extend(self.generate_strings(n-1, i, current_string+letter))
+    #         return strings
