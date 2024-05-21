@@ -15,63 +15,67 @@
 </head>
 <body>
 
-<a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Homie</h1></a>
-<p>
-    Sometimes you need some help from the homie. This homie knows lots of words.
-</p>
-<!--    TODAY's BOARD -->
-<h1>Today's Board</h1>
-<div class="board">
-    <div class="top">{{sides[0]}}</div>
-    <div class="left">{{sides[3]}}</div>
-    <div class="right">{{sides[1]}}</div>
-    <div class="bottom">{{sides[2]}}</div>
-    <div class="square"></div>
-</div>
+    <a href="{{url_for('index')}}" style="text-decoration: none; color: inherit;"><h1>NYT Letter Boxed Homie</h1></a>
+    <p>Sometimes you need some help from the homie. This homie knows lots of words.</p>
+    <!--    TODAY's BOARD -->
+    <h1>Today's Board</h1>
+    <div class="board">
+        <div class="top">{{sides[0]}}</div>
+        <div class="left">{{sides[3]}}</div>
+        <div class="right">{{sides[1]}}</div>
+        <div class="bottom">{{sides[2]}}</div>
+        <div class="square"></div>
+    </div>
 
-<h2>Try submitting a word to see if it's part of a two word solution</h2>
-<form action="/check_word" method="post">
-    <input type="text" name="user_word" id="user-word" placeholder="Check word">
-    <button type="submit">Submit</button>
-</form>
+    <h2>Try submitting a word to see if it's part of a two word solution</h2>
+    <form action="/check_word" method="post">
+        <input type="text" name="user_word" id="user-word" placeholder="Check word">
+        <button type="submit">Submit</button>
+    </form>
 
-{% if is_correct is not none and user_word %}
-{% if is_correct == true %}
-<h2>Looks like {{user_word}} is part of a two word solution :)))</h2>
-{% else %}
-<h2>Sorry, {{user_word}} isn't part of a two word solution :(</h2>
-{% endif %}
-{% endif %}
+    {% if is_correct is not none and user_word %}
 
-<h2>Check all valid words that start with a letter</h2>
-<form action="/check_letter" method="post">
-    <input type="text" name="user_letter" id="user-letter" placeholder="Check letter">
-    <button type="submit">Submit</button>
-</form>
+    {% if is_correct == true %}
+    <h2>Looks like {{user_word}} is part of a two word solution :)))</h2>
 
-{% if user_letter is not none and valid_words is not none %}
-<h2>Here are the words that start with {{user_letter}}:</h2>
-<ul>
-    {% for word in valid_words %}
-    <li>{{word}}</li>
-    {% endfor %}
-</ul>
-{% elif user_letter is not none and valid_words is none %}
-<h2>Couldn't find any words that start with {{user_letter}}</h2>
-{% endif %}
+    {% else %}
+    <h2>Sorry, {{user_word}} isn't part of a two word solution :(</h2>
 
-<!-- SOLUTIONS -->
-<h2 id="nyt-solution-toggle">NYT Solution</h2>
-<p id="nyt-solution" class="hidden">{{nyt_solution[0]}}, {{nyt_solution[1]}}</p>
-<h2 id="programmatic-solution-toggle">Programmatic Solution</h2>
-<ul id="programmatic-solution-list" class="hidden">
-    {% for solution in prog_solutions %}
-    <li>{{solution[0]}}, {{solution[1]}}</li>
-    {% endfor %}
-</ul>
+    {% endif %}
+
+    {% endif %}
+
+    <h2>Check all valid words that start with a letter</h2>
+    <form action="/check_letter" method="post">
+        <input type="text" name="user_letter" id="user-letter" placeholder="Check letter">
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if user_letter is not none and valid_words is not none %}
+    <h2>Here are the words that start with {{user_letter}}:</h2>
+    <ul>
+        {% for word in valid_words %}
+        <li>{{word}}</li>
+        {% endfor %}
+    </ul>
+    {% elif user_letter is not none and valid_words is none %}
+    <h2>Couldn't find any words that start with {{user_letter}}</h2>
+    {% endif %}
+
+    <!-- SOLUTIONS -->
+    <h2 id="nyt-solution-toggle">NYT Solution</h2>
+    <p id="nyt-solution" class="hidden">{{nyt_solution[0]}}, {{nyt_solution[1]}}</p>
+    <h2 id="programmatic-solution-toggle">Programmatic Solution</h2>
+    <ul id="programmatic-solution-list" class="hidden">
+        {% for solution in prog_solutions %}
+        <li>{{solution[0]}}, {{solution[1]}}</li>
+        {% endfor %}
+    </ul>
 
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
 
 <footer>
     <div id="footer-content">
