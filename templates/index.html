@@ -50,17 +50,9 @@
         <input type="text" name="user_letter" id="user-letter" placeholder="Check letter">
         <button type="submit">Submit</button>
     </form>
-
-    {% if user_letter is not none and valid_words is not none %}
-    <h2>Here are the words that start with {{user_letter}}:</h2>
-    <ul>
-        {% for word in valid_words %}
-        <li>{{word}}</li>
-        {% endfor %}
-    </ul>
-    {% elif user_letter is not none and valid_words is none %}
-    <h2>Couldn't find any words that start with {{user_letter}}</h2>
-    {% endif %}
+    <br>
+    {% block body %}
+    {% endblock %}
 
     <!-- SOLUTIONS -->
     <h2 id="nyt-solution-toggle">NYT Solution</h2>
@@ -71,10 +63,6 @@
         <li>{{solution[0]}}, {{solution[1]}}</li>
         {% endfor %}
     </ul>
-
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-
 
 
 <footer>
@@ -94,6 +82,6 @@
         <p>&copy; 2024 Matt Schwimmer. All Rights Reserved.</p>
     </div>
 </footer>
-
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
