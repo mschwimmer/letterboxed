@@ -6,6 +6,7 @@ from letterboxedsolver import LetterBoxedSolver
 
 app = Flask(__name__)
 
+
 def get_nyt_metadata():
     r = requests.get('https://www.nytimes.com/puzzles/letter-boxed')
     # Pull metadata from New York Times
@@ -16,6 +17,7 @@ def get_nyt_metadata():
     todays_metadata['ourSolution'] = [word.lower() for word in todays_metadata['ourSolution']]
     return {'sides': todays_metadata['sides'], 'nyt_solution': todays_metadata['ourSolution']}
 
+
 TODAY_METADATA = get_nyt_metadata()
 print(TODAY_METADATA['sides'])
 BOARD = Board(TODAY_METADATA['sides'])
@@ -25,6 +27,7 @@ FLAT_TWO_WORD_SOLUTIONS = {word for solution in TWO_WORD_SOLUTIONS for word in s
 # Create a dict that matches first letter to list of words with first letter
 # FIRST_LETTER_MAP = {first_letter: [word for word in FLAT_TWO_WORD_SOLUTIONS if word.startswith(first_letter)] for first_letter in set(word[0] for word in FLAT_TWO_WORD_SOLUTIONS)}
 
+
 @app.route('/')
 def index():
 
@@ -33,11 +36,11 @@ def index():
                            nyt_solution=TODAY_METADATA['nyt_solution'],
                            prog_solutions=TWO_WORD_SOLUTIONS)
 
+
 @app.route('/check_word', methods=['POST'])
 def check_word():
     if request.method == 'POST':
         user_input = request.form['user_word'].lower()
-
 
         is_correct = user_input in FLAT_TWO_WORD_SOLUTIONS
         print(user_input)
@@ -49,6 +52,7 @@ def check_word():
                             prog_solutions=TWO_WORD_SOLUTIONS,
                             is_correct=is_correct,
                             user_word=user_input)
+
 
 @app.route('/check_letter', methods=['POST'])
 def check_letter():
@@ -64,6 +68,7 @@ def check_letter():
                                prog_solutions=TWO_WORD_SOLUTIONS,
                                valid_words=valid_words,
                                user_letter=user_input)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

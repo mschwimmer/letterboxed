@@ -45,7 +45,7 @@
     </form>
 
     {% if user_letter is not none and valid_words is not none %}
-    <h2>Here's the words that start with {{user_letter}}:</h2>
+    <h2>Here are the words that start with {{user_letter}}:</h2>
     <ul>
         {% for word in valid_words %}
             <li>{{word}}</li>
