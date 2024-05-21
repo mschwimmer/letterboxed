@@ -17,6 +17,7 @@ def get_nyt_metadata():
     todays_metadata['ourSolution'] = [word.lower() for word in todays_metadata['ourSolution']]
     return {'sides': todays_metadata['sides'], 'nyt_solution': todays_metadata['ourSolution']}
 
+
 TODAY_METADATA = get_nyt_metadata()
 print(TODAY_METADATA['sides'])
 BOARD = Board(TODAY_METADATA['sides'])
