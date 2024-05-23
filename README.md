@@ -9,4 +9,9 @@ Often I would have 1 really good word, but couldn't figure out the second word i
 I wanted to make an app that can let me know if I'm barking up the wrong tree, or if there's actually a second word for me to find.
 
 So, I created the homie for the popular New York Times game 'Letter Boxed'.
+____________________________________________________________________________
+
+Important Notes:
+
+The New York Times uses the Oxford English Dictionary (OED) as a wordbank, which is regularly updated with the latest and greatest pheonetic creations of humanity. While I do think this is 'lit,' there is no free version of the OED wordbank. So, I opted for 3 different free English wordbanks.
 
